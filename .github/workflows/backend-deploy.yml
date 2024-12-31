@@ -43,4 +43,14 @@ jobs:
         run: |
           npm install -g @railway/cli
           cd back-end
-          railway up --service "nexistaskbot-backend" 
+          railway up --service "nexistaskbot-backend"
+          
+      - name: Initialize Database
+        env:
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_DB: ${{ secrets.MYSQL_DB }}
+        run: |
+          cd back-end
+          mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DB < ../tap_tap.sql 
