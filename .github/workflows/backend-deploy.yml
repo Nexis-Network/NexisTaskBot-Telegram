@@ -26,10 +26,21 @@ jobs:
           cd back-end
           npm install
 
+      - name: Create env file
+        run: |
+          cd back-end
+          echo "SECRET_KEY=\"${{ secrets.SECRET_KEY }}\"" > .env
+          echo "MYSQL_HOST=\"${{ secrets.MYSQL_HOST }}\"" >> .env
+          echo "MYSQL_DB=\"${{ secrets.MYSQL_DB }}\"" >> .env
+          echo "MYSQL_USER=\"${{ secrets.MYSQL_USER }}\"" >> .env
+          echo "MYSQL_PASSWORD=\"${{ secrets.MYSQL_PASSWORD }}\"" >> .env
+          echo "TELEGRAM_BOT_TOKEN=\"${{ secrets.TELEGRAM_BOT_TOKEN }}\"" >> .env
+          echo "ALLOWED_ORIGINS=\"https://nexis-network.github.io\"" >> .env
+
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
           npm install -g @railway/cli
           cd back-end
-          railway up 
+          railway up --service "nexistaskbot-backend" 
