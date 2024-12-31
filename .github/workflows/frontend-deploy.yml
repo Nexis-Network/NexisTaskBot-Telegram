@@ -27,11 +27,14 @@ jobs:
       - name: Install Dependencies
         run: |
           cd front-end
-          npm install
+          npm ci
+
+      - name: Create env file
+        run: |
+          cd front-end
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > .env
 
       - name: Build
-        env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
         run: |
           cd front-end
           npm run build
@@ -40,4 +43,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./front-end/dist 
+          publish_dir: ./front-end/dist
+          cname: ${{ secrets.CNAME }}
+          enable_jekyll: false
+          force_orphan: true 

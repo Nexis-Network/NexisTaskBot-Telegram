@@ -26,6 +26,11 @@ jobs:
           cd back-end
           npm install
 
+      - name: Install MySQL Client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mysql-client
+
       - name: Create env file
         run: |
           cd back-end
@@ -36,6 +41,7 @@ jobs:
           echo "MYSQL_PASSWORD=\"${{ secrets.MYSQL_PASSWORD }}\"" >> .env
           echo "TELEGRAM_BOT_TOKEN=\"${{ secrets.TELEGRAM_BOT_TOKEN }}\"" >> .env
           echo "ALLOWED_ORIGINS=\"https://nexis-network.github.io\"" >> .env
+          echo "PORT=\"3000\"" >> .env
 
       - name: Deploy to Railway
         env:
@@ -52,5 +58,4 @@ jobs:
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
           MYSQL_DB: ${{ secrets.MYSQL_DB }}
         run: |
-          cd back-end
-          mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DB < ../tap_tap.sql 
+          mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DB" < tap_tap.sql 
