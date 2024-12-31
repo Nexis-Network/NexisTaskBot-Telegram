@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    user-select: none;
+  }
+  html {
+    font-family: "Inter", sans-serif;
+  }
+  body {
+    overflow: hidden;
+    user-select: none;
+  }
+}
