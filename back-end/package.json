@@ -5,7 +5,8 @@
     "scripts": {
         "start": "node ./bin/www",
         "dev": "nodemon ./bin/www",
-        "postinstall": "npm install cors"
+        "vercel-build": "npm install",
+        "postinstall": "npm install cors express-session cookie-parser"
     },
     "dependencies": {
         "bcrypt": "^5.1.1",
