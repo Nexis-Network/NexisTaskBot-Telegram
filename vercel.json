@@ -2,19 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "back-end/bin/www",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["back-end/**"],
-        "buildCommand": "cd back-end && npm install"
-      }
+      "src": "back-end/package.json",
+      "use": "@vercel/node"
     },
     {
       "src": "front-end/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist",
-        "buildCommand": "cd front-end && npm install && npm run build"
+        "distDir": "dist"
       }
     }
   ],
