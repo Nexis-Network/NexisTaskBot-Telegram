@@ -1,0 +1,14 @@
+{
+  "name": "nexistaskbot",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "back-end",
+    "front-end"
+  ],
+  "scripts": {
+    "start": "cd back-end && npm install && npm start",
+    "build": "cd back-end && npm install",
+    "postinstall": "cd back-end && npm install"
+  }
+} 
