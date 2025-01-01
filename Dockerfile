@@ -10,8 +10,9 @@ RUN apt-get update && apt-get install -y \
 # Copy package files
 COPY back-end/package*.json ./
 
-# Install app dependencies
-RUN npm install
+# Install app dependencies including cors
+RUN npm install && \
+    npm install cors express-session cookie-parser nodemon
 
 # Copy app source
 COPY back-end ./
@@ -23,5 +24,5 @@ ENV NODE_ENV=production \
 # Expose port
 EXPOSE 3000
 
-# Start the app
-CMD ["npm", "start"] 
+# Start the app without nodemon in production
+CMD ["node", "./bin/www"] 
