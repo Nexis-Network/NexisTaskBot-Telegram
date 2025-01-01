@@ -1,16 +1,12 @@
 {
   "version": 2,
+  "buildCommand": "cd front-end && npm install && npm run build",
+  "outputDirectory": "front-end/dist",
+  "installCommand": "cd back-end && npm install",
   "builds": [
     {
-      "src": "back-end/package.json",
+      "src": "back-end/bin/www",
       "use": "@vercel/node"
-    },
-    {
-      "src": "front-end/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
     }
   ],
   "routes": [
@@ -23,7 +19,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/front-end/dist/$1"
+      "dest": "/$1"
     }
   ],
   "env": {
