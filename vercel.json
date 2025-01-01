@@ -2,6 +2,7 @@
   "version": 2,
   "buildCommand": "cd front-end && npm install && npm run build",
   "outputDirectory": "front-end/dist",
+  "installCommand": "cd back-end && npm install",
   "builds": [
     {
       "src": "back-end/bin/www",
@@ -18,7 +19,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/index.html"
     }
   ],
   "env": {
