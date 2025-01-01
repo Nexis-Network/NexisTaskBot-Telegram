@@ -1,26 +1,29 @@
 {
   "version": 2,
-  "buildCommand": "cd front-end && npm install && npm run build",
-  "outputDirectory": "front-end/dist",
-  "installCommand": "cd back-end && npm install",
   "builds": [
     {
       "src": "back-end/bin/www",
       "use": "@vercel/node"
+    },
+    {
+      "src": "front-end/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "front-end/dist"
+      }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/back-end/bin/www"
+      "dest": "back-end/bin/www"
     },
     {
       "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/$1",
-      "continue": true
+      "dest": "front-end/dist/$1"
     }
   ],
   "env": {
@@ -29,7 +32,6 @@
     "MYSQL_PASSWORD": "db7a6a1b-1029-47fd-8b88-f2ee37140033",
     "MYSQL_DB": "nexis_tasks",
     "SECRET_KEY": "f119b5e0853943364dfecf6df7d9780aa4496c380e2c87871f996efffef3e13e",
-    "TELEGRAM_BOT_TOKEN": "7667425793:AAHrH7ac0QXvW_8gUbQXAWkh4n2NcoAA9M4",
-    "NODE_ENV": "production"
+    "TELEGRAM_BOT_TOKEN": "7667425793:AAHrH7ac0QXvW_8gUbQXAWkh4n2NcoAA9M4"
   }
 } 
