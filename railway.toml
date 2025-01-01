@@ -1,0 +1,25 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd back-end && npm install"
+watchPatterns = ["back-end/**"]
+
+[deploy]
+startCommand = "cd back-end && npm start"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+healthcheckPath = "/api/health"
+healthcheckTimeout = 100
+
+[deploy.railway]
+name = "nexistaskbot-backend"
+
+[[services]]
+name = "mysql"
+type = "mysql"
+plan = "free"
+
+[[services]]
+name = "web"
+type = "web"
+plan = "free"
+env = ["MYSQL_HOST", "MYSQL_DB", "MYSQL_USER", "MYSQL_PASSWORD", "SECRET_KEY", "TELEGRAM_BOT_TOKEN", "ALLOWED_ORIGINS"] 
